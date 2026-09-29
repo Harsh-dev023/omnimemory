@@ -4,10 +4,11 @@
 
 ### **Privacy-First, 100% Offline Ambient System Context Engine for Developers**
 
-[![Local-First](https://img.shields.io/badge/Local--First-100%25-059669?style=for-the-badge&logo=sqlite&logoColor=white)](https://github.com/)
-[![Privacy Guarantee](https://img.shields.io/badge/Privacy-Zero%20Cloud-2563EB?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/)
-[![Query Latency](https://img.shields.io/badge/Latency-44ms%20Median-EA580C?style=for-the-badge&logo=speedtest&logoColor=white)](https://github.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/Harsh-dev023/omnimemory/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/Harsh-dev023/omnimemory/actions)
+[![Local-First](https://img.shields.io/badge/Local--First-100%25-059669?style=for-the-badge&logo=sqlite&logoColor=white)](https://github.com/Harsh-dev023/omnimemory)
+[![Privacy Guarantee](https://img.shields.io/badge/Privacy-Zero%20Cloud-2563EB?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/Harsh-dev023/omnimemory)
+[![Query Latency](https://img.shields.io/badge/Latency-44ms%20Median-EA580C?style=for-the-badge&logo=speedtest&logoColor=white)](https://github.com/Harsh-dev023/omnimemory)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/Harsh-dev023/omnimemory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-9333EA?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <br/>
