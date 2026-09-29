@@ -42,4 +42,5 @@ jobs:
         run: npm test
 
       - name: Run Hybrid Vector Benchmark
+        if: matrix.node-version == '20.x'
         run: npm run benchmark
