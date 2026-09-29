@@ -11,8 +11,11 @@ export class TerminalIngestor {
   
   constructor(private dbService: DBService, customShell?: string) {
     const fs = require('fs');
-    const shellCandidates = [customShell, process.env.SHELL, '/bin/zsh', '/bin/bash', '/bin/sh'];
-    const resolvedShell = shellCandidates.find(s => s && fs.existsSync(s)) || '/bin/sh';
+    const isWin = os.platform() === 'win32';
+    const shellCandidates = isWin 
+      ? [customShell, process.env.COMSPEC, 'powershell.exe', 'cmd.exe']
+      : [customShell, process.env.SHELL, '/bin/zsh', '/bin/bash', '/bin/sh'];
+    const resolvedShell = shellCandidates.find(s => s && (isWin && (s === 'powershell.exe' || s === 'cmd.exe') ? true : fs.existsSync(s))) || (isWin ? 'cmd.exe' : '/bin/sh');
 
     this.ptyProcess = pty.spawn(resolvedShell, [], {
       name: 'xterm-256color',

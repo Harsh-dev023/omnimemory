@@ -107,6 +107,8 @@ export class ServiceInstaller {
       ServiceInstaller.installMacOS(nodeBinary, daemonScript);
     } else if (platform === 'linux') {
       ServiceInstaller.installLinux(nodeBinary, daemonScript);
+    } else if (platform === 'win32') {
+      ServiceInstaller.installWindows(nodeBinary, daemonScript);
     } else {
       throw new Error(`Automatic service installation is not supported on platform: ${platform}`);
     }
@@ -118,6 +120,8 @@ export class ServiceInstaller {
       ServiceInstaller.uninstallMacOS();
     } else if (platform === 'linux') {
       ServiceInstaller.uninstallLinux();
+    } else if (platform === 'win32') {
+      ServiceInstaller.uninstallWindows();
     }
   }
 
@@ -197,6 +201,30 @@ WantedBy=default.target`;
       fs.unlinkSync(servicePath);
       execSync('systemctl --user daemon-reload');
       console.log(`[ServiceInstaller] Linux systemd service removed.`);
+    }
+  }
+  private static installWindows(nodePath: string, daemonPath: string): void {
+    // We use schtasks to run the daemon on startup and background it
+    const taskName = 'OmniMemoryDaemon';
+    const command = `"${nodePath}" "${daemonPath}"`;
+    
+    try {
+      execSync(`schtasks /Create /TN "${taskName}" /TR "${command}" /SC ONLOGON /F`);
+      execSync(`schtasks /Run /TN "${taskName}"`);
+      console.log(`[ServiceInstaller] Windows scheduled task created & started: ${taskName}`);
+    } catch (err) {
+      console.error('[ServiceInstaller] Failed to install Windows service via schtasks:', err);
+    }
+  }
+
+  private static uninstallWindows(): void {
+    const taskName = 'OmniMemoryDaemon';
+    try {
+      execSync(`schtasks /End /TN "${taskName}" 2>nul || exit 0`);
+      execSync(`schtasks /Delete /TN "${taskName}" /F`);
+      console.log(`[ServiceInstaller] Windows scheduled task removed.`);
+    } catch (err) {
+      console.error('[ServiceInstaller] Failed to uninstall Windows service:', err);
     }
   }
 }
